@@ -10,7 +10,9 @@
             <label for="todoItem">TodoItem</label>
             <input type="text" class="form-control" #todoItem>
             <div class="mt-2">
-                <button  *ngIf="!isInEditMode" mat-raised-button  class="w-100"  color="primary">Add Todo</button>
+                <button  *ngIf="!isInEditMode" 
+                (click)="onTodoAdd()"
+                mat-raised-button  class="w-100"  color="primary">Add Todo</button>
                 <button  *ngIf="isInEditMode" mat-raised-button   class="w-100" color="primary">Update Todo</button>
             </div>
         </div>
