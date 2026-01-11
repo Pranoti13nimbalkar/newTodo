@@ -13,7 +13,7 @@
                 <button  *ngIf="!isInEditMode" 
                 (click)="onTodoAdd()"
                 mat-raised-button  class="w-100"  color="primary">Add Todo</button>
-                <button  *ngIf="isInEditMode" mat-raised-button   class="w-100" color="primary">Update Todo</button>
+                <button (click)="onUpdateTodo()" *ngIf="isInEditMode" mat-raised-button   class="w-100" color="primary">Update Todo</button>
             </div>
         </div>
       </div>
@@ -22,7 +22,7 @@
             <li class="list-group-item d-flex justify-content-between" *ngFor="let todo of todosArr ; trackBy: trackByTodo">
                 <strong>{{todo.todoItem.toUpperCase()}}</strong>
                <div>
-                <button class="mr-2" mat-mini-fab color="primary" ><mat-icon>edit</mat-icon></button>
+                <button (click)="onTodoEdit(todo)"  class="mr-2" mat-mini-fab color="primary" ><mat-icon>edit</mat-icon></button>
                 <button 
                 (click)="onRemove(todo.todoId)"
                 mat-mini-fab color="warn"><mat-icon>delete</mat-icon></button>

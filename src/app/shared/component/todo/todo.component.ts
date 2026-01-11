@@ -12,6 +12,7 @@ import { GetConfirmComponent } from '../get-confirm/get-confirm.component';
 })
 export class TodoComponent implements OnInit {
   isInEditMode:boolean=false
+  editId!:string
 todosArr : Array<ITodos>= todoArr
 
 @ViewChild('todoItem') todoItem !: ElementRef
@@ -70,7 +71,31 @@ trackByTodo(index:number , trackByTodo:ITodos){
           })
         }
       })
+  }
 
+  onTodoEdit(todo:ITodos){
+    this.todoItem.nativeElement.value = todo.todoItem;
+    this.isInEditMode=true
+    this.editId = todo.todoId
   }
   
+  onUpdateTodo(){
+    let updated_obj:ITodos={
+      todoItem : this.todoItem.nativeElement.value,
+      todoId : this.editId
+    }
+    let getIndex = this.todosArr.findIndex(t=>t.todoId === updated_obj.todoId)
+    this.todosArr[getIndex] = updated_obj
+    this.isInEditMode=false
+    this.todoItem.nativeElement.value="";
+    
+
+    this._snackBar.open(`the todo item with id ${this.editId} is updated successfully..!!`,'Close',
+      {
+        horizontalPosition:'left',
+        verticalPosition:'top',
+        duration:3000
+      }
+    )
+  }
 }
